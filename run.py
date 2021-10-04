@@ -28,6 +28,10 @@ def get_sales_data():
     data_str = input("Enter your data here: ")
     print(f"The data provided is {data_str}")
 
+    # below we're using the split() method to return the broken values as a list rather than as a string
+    # values need to be in a list in order to be added to the G. sheet
+    sales_data = data_str.split(",")
+    print(sales_data)
 # calling function:
 get_sales_data()
 
