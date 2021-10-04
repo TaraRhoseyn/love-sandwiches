@@ -31,7 +31,29 @@ def get_sales_data():
     # below we're using the split() method to return the broken values as a list rather than as a string
     # values need to be in a list in order to be added to the G. sheet
     sales_data = data_str.split(",")
-    print(sales_data)
+    validate_data(sales_data)
+
+# parameter = values
+def validate_data(values):
+    """
+    Inside the true, converts all string values into integers.
+    Raises ValueError if strings cannot be converted into int,
+    or if there aren't exactly 6 values.
+    """
+    try:
+        # len() method means length
+        if len(values) != 6:
+            raise ValueError(
+                f"Exactly 6 values required, you provided {len(values)}"
+            )
+    # 'e' is standard python shorthand for error
+    # we're data the data from the inputted data
+    # and putting it into the variable 'e'
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again")
+
+    print(values)
+
 # calling function:
 get_sales_data()
 
