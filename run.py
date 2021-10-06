@@ -16,6 +16,11 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('love_sandwiches')
 
 def get_sales_data():
+    """
+    Gets data from users in the terminal
+    Splits that data to remove commas
+    Passes data to sales_data if validate_data function is True
+    """
     while True:
         print("Please enter sales data from the last market.")
         print("Data should be six numbers, separated by commas")
@@ -32,8 +37,13 @@ def get_sales_data():
 
 
 def validate_data(values):
+    """
+    Converts user string values into inters.
+    Raises ValueError if not exactly 5 values are entered
+    returns True if try passes and False if ValueError called
+    """
     try:
-        [int(value) for value in values]
+        [int(value) for value in values] # a list comprehension
         if len(values) != 6:
             raise ValueError(
                 f"Exactly 6 values required, you provided {len(values)}"
@@ -43,4 +53,15 @@ def validate_data(values):
         return False
     return True
 
+def update_sales_worksheet(data):
+    """
+    Update sales worksheet, add new row with the list data provided.
+    """
+    print("Updating sales worksheet...\n")
+    sales_worksheet = SHEET.worksheet("sales")
+    sales_worksheet.append_row(data)
+    print("Sales worksheet updated successfully\n")
+
 data = get_sales_data()
+sales_data = [int(num) for num in data]
+update_sales_worksheet(sales_data)
