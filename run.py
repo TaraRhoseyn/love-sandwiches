@@ -26,8 +26,6 @@ def get_sales_data():
 
     # data will be returned as a string, so we call the input data_str
     data_str = input("Enter your data here: ")
-    print(f"The data provided is {data_str}")
-
     # below we're using the split() method to return the broken values as a list rather than as a string
     # values need to be in a list in order to be added to the G. sheet
     sales_data = data_str.split(",")
@@ -41,6 +39,7 @@ def validate_data(values):
     or if there aren't exactly 6 values.
     """
     try:
+        [int(value) for value in values]
         # len() method means length
         if len(values) != 6:
             raise ValueError(
@@ -60,3 +59,15 @@ get_sales_data()
 
 # csv = comma-seperated values, file type that allows data to be saved in tablet format
 
+"""
+Data type of anything inserted in the terminal by the user
+is always a string. We need to convert data to ints
+Can't do maths with strings.
+"""
+
+"""
+in the terminal, open python shell
+by typing "python3", shell will 
+appear with >>>
+
+"""
